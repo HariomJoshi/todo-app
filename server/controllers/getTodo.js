@@ -1,16 +1,17 @@
 const User = require("../models/userModel");
 
 async function getTodo(req, res) {
-  if (!req.body.email) {
+  // console.log(req);
+  const email = req.query.email;
+  console.log({ email });
+  if (!email) {
     return res.status(404).json({
       message: "email not present in body",
     });
   }
   // gmail is present in request
   try {
-    const todos = await User.findOne({ email: req.body.email }).populate(
-      "todos"
-    );
+    const todos = await User.findOne({ email: email }).populate("todos");
     if (!todos) {
       // user not found
       return res.status(400).json({

@@ -4,6 +4,7 @@ const User = require("../models/userModel");
 async function putTodo(req, res) {
   // takes 3 things -> title, description, email
   const { email, title, description } = req.body;
+  // console.log({ email, title, description });
   if (!title || !email) {
     // a todo is not possible without a title
     return res.status(401).json({

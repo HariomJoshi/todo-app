@@ -6,8 +6,12 @@ const getTodo = require("./controllers/getTodo");
 const putTodo = require("./controllers/putTodo");
 const mongoose = require("mongoose");
 const auth = require("./middlewares/auth");
+const cors = require("cors");
 const app = express();
+
+// middlewares
 app.use(express.json());
+app.use(cors());
 
 const DB_LINK = process.env.CONNECTION;
 const port = process.env.PORT;
@@ -27,8 +31,9 @@ app.get("/", (req, res) => {
 app.post("/api/v1/login", loginController);
 app.post("/api/v1/signup", signupController);
 // following actions are authorized only when the user is legitimate
-app.get("/api/v1/getTodos", auth, getTodo);
-app.post("/api/v1/putTodos", auth, putTodo);
+// REMINDER: removing the auth middleware for now , have to add it later
+app.get("/api/v1/getTodos", getTodo);
+app.post("/api/v1/putTodos", putTodo);
 
 app.listen(port, () => {
   console.log("Listening to port " + port);
