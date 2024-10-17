@@ -8,6 +8,7 @@ const AddTodo = () => {
   const dispatch = useDispatch();
 
   const onAddTodo = ({ title, description }) => {
+    // dispatch a reducer addTodo
     dispatch(addTodo({ title, description }));
   };
 
